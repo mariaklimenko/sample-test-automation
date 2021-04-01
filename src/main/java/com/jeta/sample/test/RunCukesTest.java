@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/main/resources/features/hiptest/",
-        glue = "com.vix.whisper.test",
+        features = "src/main/resources/features/",
+        glue = "com.jeta.sample.test",
        // tags ={"@Regression and @Automated"},
         plugin = {"json:target/cucumber-report.json","usage"}
 )

@@ -64,7 +64,7 @@ public class RestSteps extends RestTestBase {
     @When("^Request POST comment, code \"(.*?)\"$")
     public void postRequest(int code) throws Throwable {
         response = post("comments", comment);
-        assertEquals("Response code is invalid", 520, response.getStatusCode());
+        assertEquals("Response code is invalid", 201, response.getStatusCode());
     }
 
     @Given("^Use file \"(.*?)\" as comment template$")

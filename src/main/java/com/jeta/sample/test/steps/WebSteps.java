@@ -54,16 +54,16 @@ public class WebSteps extends WebTestBase {
 
     @Then("^I logged as mary_black$")
     public void i_logged_as_correct_user() throws Throwable {
-        String expectedAccName = "maryblack12345@gmail.com";
+        String expectedAccName = "maryblack@gmail.com";
         String actualAccName = header_link_account.getText();
         assertEquals("Account name is invalid", expectedAccName, actualAccName);    }
 
     @Given("^I enter credentials for mary_black$")
     public void i_enter_credentials_user() throws Throwable {
         email.clear();
-        email.sendKeys("maryblack12345@gmail.com");
+        email.sendKeys("maryblack@gmail.com");
         password.clear();
-        password.sendKeys("123456");
+        password.sendKeys("12345test");
     }
 
     @When("^I click Login button$")
