@@ -25,4 +25,4 @@ jobs:
           restore-keys: maven-${{ runner.os }}-
 
       - name: Run Maven Tests
-        run: mvn test -Dcucumber.options="--tags @rest"
+        run: mvn test -Dcucumber.options="--tags @rest" -Dthreads=1
