@@ -24,5 +24,5 @@ jobs:
           key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
           restore-keys: maven-${{ runner.os }}-
 
-      - name: Run Maven Tests
-        run: mvn test
+      - name: Run Maven Rests Tests 
+        run: mvn test -Dcucumber.options="--tags @rest"
