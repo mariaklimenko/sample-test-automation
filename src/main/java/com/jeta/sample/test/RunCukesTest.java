@@ -1,15 +1,30 @@
 package com.jeta.sample.test;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+import org.testng.annotations.DataProvider;
 
-@RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/main/resources/features/",
+        features = "src/main/resources/features",
         glue = "com.jeta.sample.test",
-       // tags ={"@Regression and @Automated"},
-        plugin = {"json:target/cucumber-report.json","usage"}
+        tags = "@DebugParallel",
+        plugin = {
+                "json:target/cucumber-report.json",
+                "testng:target/testng-results.xml",
+                "junit:target/junit.xml",
+                "rerun:target/failedrerun.txt",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+        }
 )
-public class RunCukesTest {
+public class RunCukesTest extends AbstractTestNGCucumberTests {
+  /*  @Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios() {
+        boolean parallel = false;
+        if(System.getProperty("parallel") != null){
+            parallel = Boolean.parseBoolean(System.getProperty("parallel"));
+        }
+      //  AutomationProperties.getInstance(parallel);
+        return super.scenarios();
+    } */
 }

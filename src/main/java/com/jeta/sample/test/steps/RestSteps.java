@@ -4,26 +4,24 @@ package com.jeta.sample.test.steps;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jeta.sample.test.common.RestTestBase;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import net.minidev.json.JSONArray;
-import org.junit.Assert;
+import static org.testng.AssertJUnit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.*;
 
 public class RestSteps extends RestTestBase {
     private final Logger LOGGER = LoggerFactory.getLogger(RestSteps.class);

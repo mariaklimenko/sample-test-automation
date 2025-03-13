@@ -2,17 +2,17 @@ package com.jeta.sample.test.steps;
 
 import com.codeborne.selenide.SelenideElement;
 import com.jeta.sample.test.common.WebTestBase;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import org.junit.Assert;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static junit.framework.TestCase.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 public class WebSteps extends WebTestBase {
     private final SelenideElement email = $(By.id("Email"));
