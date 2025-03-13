@@ -3,8 +3,8 @@
 <suite name="Run all tests" verbose="1" parallel="tests" thread-count="1" configfailurepolicy="continue">
     <test name="Run all tests" annotations="JDK" preserve-order="true">
         <classes>
-            <class name="com.vix.whisper.test.RunCukesTest"/>
-            <class name="com.vix.whisper.test.FailedTestReRun"/>
+            <class name="com.jeta.sample.test.RunCukesTest"/>
+           <!-- <class name="com.jeta.sample.test.FailedTestReRun"/> -->
         </classes>
     </test>
 </suite>
