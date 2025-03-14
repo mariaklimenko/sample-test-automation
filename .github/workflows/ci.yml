@@ -29,16 +29,18 @@ jobs:
 
       - name: Install Allure
         run: |
-          sudo apt-get update
-          sudo apt-get install -y allure
-          
+          curl -o allure-2.21.0.tgz -L https://github.com/allure-framework/allure2/releases/download/2.21.0/allure-2.21.0.tgz
+          tar -zxvf allure-2.21.0.tgz
+          sudo mv allure-2.21.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+          allure --version
+
       - name: Generate Allure Report
-        run: |
-          mvn allure:report
+        run: mvn allure:report
 
       - name: Upload Allure Report as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: allure-report
-          path: target/site/allure-maven/index.html
+          path: target/site/allure-maven/
           retention-days: 30
