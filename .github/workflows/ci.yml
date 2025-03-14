@@ -15,7 +15,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'  # Using Temurin for JDK 11 (you can change this to Zulu or others)
+          distribution: 'temurin'
           java-version: '11'
 
       - name: Run tests
@@ -26,21 +26,21 @@ jobs:
         if: always()
         continue-on-error: true
         with:
-          ref: gh-pages  # Ensure it matches the branch you use for GitHub Pages
-          path: gh-pages  # A local directory where the history is stored
+          ref: gh-pages
+          path: gh-pages
 
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: gh-pages  # History folder name from the previous step
-          allure_history: allure-history  # Directory where the new report will be stored
-          allure_results: target/allure-results  # Path to the Maven allure results folder
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: target/allure-results
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for publishing
-          publish_branch: gh-pages  # Branch used for GitHub Pages
-          publish_dir: allure-history  # The directory where the built report is stored
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
