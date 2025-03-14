@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"111a2314e109123ab7b8dc0ca0bb5662","name":"POST, GET example","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}},{"uid":"571f629b99c1359c9bab64289a752e02","name":"make get request","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
