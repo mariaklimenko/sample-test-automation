@@ -26,3 +26,19 @@ jobs:
 
       - name: Run Maven Tests
         run: mvn test -Dcucumber.options="--tags @rest" -Dthreads=1
+
+      - name: Install Allure
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y allure
+          
+      - name: Generate Allure Report
+        run: |
+          mvn allure:report
+
+      - name: Upload Allure Report as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: target/site/allure-maven/index.html
+          retention-days: 30
