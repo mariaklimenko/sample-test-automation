@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 @CucumberOptions(
         features = "src/main/resources/features",
         glue = "com.jeta.sample.test",
-        tags = "@DebugParallel",
+        tags = "@rest",
         plugin = {
                 "json:target/cucumber-report.json",
                 "testng:target/testng-results.xml",
