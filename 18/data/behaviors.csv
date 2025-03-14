@@ -1,0 +1,5 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"","POST, GET example","create new comment","0","0","1","0","0"
+"","POST, GET example","generate test data","0","0","1","0","0"
+"","POST, GET example","get comment and compare objects","0","0","1","0","0"
+"","make get request","get request","0","0","1","0","0"
