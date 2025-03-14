@@ -1,7 +1,8 @@
-name: Run TestNG Tests
-
+name: Run tests and publish report
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main  # Trigger for the main branch (adjust as needed)
 
 jobs:
   test:
@@ -9,62 +10,37 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'temurin'  # Using Temurin for JDK 11 (you can change this to Zulu or others)
           java-version: '11'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: maven-${{ runner.os }}-
+      - name: Run tests
+        run: mvn clean test -Dcucumber.options="--tags @rest" -Dthreads=1
 
-      - name: Run Maven Tests
-        run: mvn test -Dcucumber.options="--tags @rest" -Dthreads=1
-
-      - name: Install Allure
-        run: |
-          curl -o allure-2.21.0.tgz -L https://github.com/allure-framework/allure2/releases/download/2.21.0/allure-2.21.0.tgz
-          tar -zxvf allure-2.21.0.tgz
-          sudo mv allure-2.21.0 /opt/allure
-          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
-          allure --version
-
-      - name: Generate Allure Report
-        run: mvn allure:report
-
-      - name: Checkout previous reports (if any)
-        uses: actions/checkout@v2
+      - name: Load test report history
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:
-          ref: gh-pages
-          path: allure_history
+          ref: gh-pages  # Ensure it matches the branch you use for GitHub Pages
+          path: gh-pages  # A local directory where the history is stored
 
-      - name: Build Allure Report
+      - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: allure_history
-          allure_results: target/allure-results
-          allure_history: allure_history
+          gh_pages: gh-pages  # History folder name from the previous step
+          allure_history: allure-history  # Directory where the new report will be stored
+          allure_results: target/allure-results  # Path to the Maven allure results folder
 
-      - name: Publish Allure Report to GitHub Pages
+      - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure_history
-
-      - name: Upload Allure Report as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: target/site/allure-maven/
-          retention-days: 30
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for publishing
+          publish_branch: gh-pages  # Branch used for GitHub Pages
+          publish_dir: allure-history  # The directory where the built report is stored
